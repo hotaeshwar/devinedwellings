@@ -1,34 +1,58 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
+// Import all images
+import dwellings1 from '../assets/images/dwellings1.jpg';
+import dwellings2 from '../assets/images/dwellings2.jpg';
+import dwellings3 from '../assets/images/dwellings3.jpg';
+import dwellings4 from '../assets/images/dwellings4.jpg';
+import dwellings5 from '../assets/images/dwellings5.jpg';
+import dwellings6 from '../assets/images/dwellings6.jpg';
+import dwellings7 from '../assets/images/dwellings7.jpg';
+import dwellings8 from '../assets/images/dwellings8.jpg';
+import dwellings9 from '../assets/images/dwellings9.jpg';
+import dwellings10 from '../assets/images/dwellings10.jpg';
+import dwellings11 from '../assets/images/dwellings11.jpg';
+import dwellings12 from '../assets/images/dwellings12.jpg';
+import dwellings13 from '../assets/images/dwellings13.jpg';
+import dwellings14 from '../assets/images/dwellings14.jpg';
+import dwellings15 from '../assets/images/dwellings15.jpg';
+import dwellings16 from '../assets/images/dwellings16.jpg';
+import dwellings17 from '../assets/images/dwellings17.jpg';
+import dwellings19 from '../assets/images/dwelllings19.jpg';
+import dwellings20 from '../assets/images/dwellings20.jpg';
+import dwellingspromo from '../assets/images/dwellingspromo.jpg';
+import dwellingspromo1 from '../assets/images/dwellingspromo1.jpg';
+import propertyvideo from '../assets/images/propertyvideo.mp4';
+
 const PropertyCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
-  // Property media items
+  // Property media items with imported assets
   const propertyMedia = [
-    { type: 'image', src: '/src/assets/images/dwellings1.jpg', alt: 'Property 1' },
-    { type: 'image', src: '/src/assets/images/dwellings2.jpg', alt: 'Property 2' },
-    { type: 'image', src: '/src/assets/images/dwellings3.jpg', alt: 'Property 3' },
-    { type: 'image', src: '/src/assets/images/dwellings4.jpg', alt: 'Property 4' },
-    { type: 'image', src: '/src/assets/images/dwellings5.jpg', alt: 'Property 5' },
-    { type: 'image', src: '/src/assets/images/dwellings6.jpg', alt: 'Property 6' },
-    { type: 'image', src: '/src/assets/images/dwellings7.jpg', alt: 'Property 7' },
-    { type: 'image', src: '/src/assets/images/dwellings8.jpg', alt: 'Property 8' },
-    { type: 'image', src: '/src/assets/images/dwellings9.jpg', alt: 'Property 9' },
-    { type: 'image', src: '/src/assets/images/dwellings10.jpg', alt: 'Property 10' },
-    { type: 'image', src: '/src/assets/images/dwellings11.jpg', alt: 'Property 11' },
-    { type: 'image', src: '/src/assets/images/dwellings12.jpg', alt: 'Property 12' },
-    { type: 'image', src: '/src/assets/images/dwellings13.jpg', alt: 'Property 13' },
-    { type: 'image', src: '/src/assets/images/dwellings14.jpg', alt: 'Property 14' },
-    { type: 'image', src: '/src/assets/images/dwellings15.jpg', alt: 'Property 15' },
-    { type: 'image', src: '/src/assets/images/dwellings16.jpg', alt: 'Property 16' },
-    { type: 'image', src: '/src/assets/images/dwellings17.jpg', alt: 'Property 17' },
-    { type: 'image', src: '/src/assets/images/dwelllings19.jpg', alt: 'Property 19' },
-    { type: 'image', src: '/src/assets/images/dwellings20.jpg', alt: 'Property 20' },
-    { type: 'image', src: '/src/assets/images/dwellingspromo.jpg', alt: 'Property Promo' },
-    { type: 'image', src: '/src/assets/images/dwellingspromo1.jpg', alt: 'Property Promo 1' },
-    { type: 'video', src: '/src/assets/images/propertyvideo.mp4', alt: 'Property Video' }
+    { type: 'image', src: dwellings1, alt: 'Property 1' },
+    { type: 'image', src: dwellings2, alt: 'Property 2' },
+    { type: 'image', src: dwellings3, alt: 'Property 3' },
+    { type: 'image', src: dwellings4, alt: 'Property 4' },
+    { type: 'image', src: dwellings5, alt: 'Property 5' },
+    { type: 'image', src: dwellings6, alt: 'Property 6' },
+    { type: 'image', src: dwellings7, alt: 'Property 7' },
+    { type: 'image', src: dwellings8, alt: 'Property 8' },
+    { type: 'image', src: dwellings9, alt: 'Property 9' },
+    { type: 'image', src: dwellings10, alt: 'Property 10' },
+    { type: 'image', src: dwellings11, alt: 'Property 11' },
+    { type: 'image', src: dwellings12, alt: 'Property 12' },
+    { type: 'image', src: dwellings13, alt: 'Property 13' },
+    { type: 'image', src: dwellings14, alt: 'Property 14' },
+    { type: 'image', src: dwellings15, alt: 'Property 15' },
+    { type: 'image', src: dwellings16, alt: 'Property 16' },
+    { type: 'image', src: dwellings17, alt: 'Property 17' },
+    { type: 'image', src: dwellings19, alt: 'Property 19' },
+    { type: 'image', src: dwellings20, alt: 'Property 20' },
+    { type: 'image', src: dwellingspromo, alt: 'Property Promo' },
+    { type: 'image', src: dwellingspromo1, alt: 'Property Promo 1' },
+    { type: 'video', src: propertyvideo, alt: 'Property Video' }
   ];
 
   // Auto-play functionality
@@ -97,7 +121,7 @@ const PropertyCarousel = () => {
                       src={media.src}
                       alt={media.alt}
                       className="w-full h-full object-cover"
-                      loading="lazy"
+                      loading={index > 2 ? "lazy" : "eager"}
                     />
                   ) : (
                     <video
@@ -181,7 +205,7 @@ const PropertyCarousel = () => {
             {/* Progress Bar */}
             <div className="w-full h-1 bg-yellow-600/20 rounded-full overflow-hidden">
               <div 
-                className="h-full bg-gradient-to-r from-yellow-400 to-yellow-600 transition-all duration-300 ease-out rounded-full"
+                className="h-full bg-gradient-to-r from-yellow-400 to-yellow-600 transition-all duration-300 ease-out"
                 style={{ width: `${((currentIndex + 1) / propertyMedia.length) * 100}%` }}
               />
             </div>
