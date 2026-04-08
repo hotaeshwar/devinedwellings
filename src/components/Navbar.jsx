@@ -123,25 +123,6 @@ const Navbar = ({ onOpenProject }) => {
                 >
                   {item.name}
 
-                  {item.id === 'gallery' && (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className={`w-3.5 h-3.5 transition-opacity duration-200 ${
-                        hoveredIndex === index ? 'opacity-100' : 'opacity-50'
-                      }`}
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                      <polyline points="15 3 21 3 21 9" />
-                      <line x1="10" y1="14" x2="21" y2="3" />
-                    </svg>
-                  )}
-
                   {/* Sliding underline per button */}
                   <span
                     className={`absolute bottom-0.5 left-3 right-3 h-0.5 rounded-full transition-all duration-300 ease-out origin-left ${
@@ -212,25 +193,7 @@ const Navbar = ({ onOpenProject }) => {
                     }`}
                   />
 
-                  <span className="relative z-10 flex items-center gap-2">
-                    {item.name}
-                    {item.id === 'gallery' && (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 transition-opacity"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                        <polyline points="15 3 21 3 21 9" />
-                        <line x1="10" y1="14" x2="21" y2="3" />
-                      </svg>
-                    )}
-                  </span>
+                  <span className="relative z-10">{item.name}</span>
                 </button>
               ))}
             </div>

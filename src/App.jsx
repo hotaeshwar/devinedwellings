@@ -103,17 +103,16 @@ function SplashScreen({ onFinish }) {
 function App() {
   const [showSplash, setShowSplash] = useState(true);
 
-  // Open Project page in a new tab using a route/query param approach
+  // Navigate to Project page in the same window
   const openProject = () => {
-    const projectUrl = `${window.location.origin}${window.location.pathname}?page=project`;
-    window.open(projectUrl, '_blank');
+    window.location.href = `${window.location.origin}${window.location.pathname}?page=project`;
   };
 
-  // Check if this tab was opened as the Project page
+  // Check if this page was opened as the Project page
   const params = new URLSearchParams(window.location.search);
   const isProjectPage = params.get('page') === 'project';
 
-  // If opened as project page, render only the Project component
+  // If on project page, render only the Project component
   if (isProjectPage) {
     return <Project />;
   }
