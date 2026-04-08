@@ -3,12 +3,10 @@ import { MapPin, Mail, Facebook, Instagram, Twitter, Linkedin, ArrowUp } from 'l
 import divineLogo from '../assets/images/Divine.png';
 
 const Footer = () => {
-  // Scroll to top function
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Smooth scroll to section
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -43,13 +41,11 @@ const Footer = () => {
                 </h3>
               </div>
 
-
-
               {/* Social Media Links */}
               <div className="flex space-x-4">
                 {[
                   { Icon: Facebook, href: '#', label: 'Facebook' },
-                  { Icon: Instagram, href: '#', label: 'Instagram' },
+                  { Icon: Instagram, href: 'https://www.instagram.com/devine_dwellings', label: 'Instagram' },
                   { Icon: Twitter, href: '#', label: 'Twitter' },
                   { Icon: Linkedin, href: '#', label: 'LinkedIn' }
                 ].map(({ Icon, href, label }) => (
@@ -57,6 +53,8 @@ const Footer = () => {
                     key={label}
                     href={href}
                     aria-label={label}
+                    target={href !== '#' ? '_blank' : undefined}
+                    rel={href !== '#' ? 'noopener noreferrer' : undefined}
                     className="group bg-gray-700 hover:bg-yellow-600 p-3 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg"
                   >
                     <Icon className="w-5 h-5 text-gray-300 group-hover:text-white transition-colors duration-300" />
