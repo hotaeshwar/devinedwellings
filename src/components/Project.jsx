@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import AashianaImg from '../assets/images/Aashiana.jpeg';
 import {
   Zap, Shield, Phone, Trees, Building2, Home,
@@ -213,7 +214,7 @@ function AashianaHills({ onBack }) {
     <div className="min-h-screen bg-black font-serif">
 
       {/* ── Back Button ── */}
-      <div className="sticky top-0 z-50 bg-black/80 backdrop-blur-md border-b border-yellow-600/20">
+      <div className="sticky top-20 sm:top-24 z-40 bg-black/80 backdrop-blur-md border-b border-yellow-600/20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center gap-3">
           <button
             onClick={onBack}
@@ -677,19 +678,18 @@ function ProjectsListing({ onSelectProject }) {
 
 // ── Main Component ────────────────────────────────────────────────────────────
 const Project = () => {
-  const [activeProject, setActiveProject] = useState(null);
+  const { projectId } = useParams();
+  const navigate = useNavigate();
 
   const handleSelectProject = (id) => {
-    setActiveProject(id);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigate(`/projects/${id}`);
   };
 
   const handleBack = () => {
-    setActiveProject(null);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigate('/projects');
   };
 
-  if (activeProject === 'aashiana-hills') {
+  if (projectId === 'aashiana-hills') {
     return <AashianaHills onBack={handleBack} />;
   }
 

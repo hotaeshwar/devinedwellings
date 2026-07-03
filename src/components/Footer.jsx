@@ -1,17 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { MapPin, Mail, Facebook, Instagram, Twitter, Linkedin, ArrowUp } from 'lucide-react';
 import divineLogo from '../assets/images/Divine.png';
 
 const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
   };
 
   return (
@@ -70,18 +64,18 @@ const Footer = () => {
               </h4>
               <ul className="space-y-3">
                 {[
-                  { name: 'Home', id: 'home' },
-                  { name: 'About Us', id: 'about' },
-                  { name: 'Services', id: 'services' },
-                  { name: 'Contact', id: 'contact' }
+                  { name: 'Home', path: '/' },
+                  { name: 'About Us', path: '/about' },
+                  { name: 'Gallery', path: '/projects' },
+                  { name: 'Contact', path: '/contact' }
                 ].map((link) => (
-                  <li key={link.id}>
-                    <button
-                      onClick={() => scrollToSection(link.id)}
+                  <li key={link.name}>
+                    <Link
+                      to={link.path}
                       className="text-gray-300 hover:text-yellow-400 transition-colors duration-300 text-sm sm:text-base hover:translate-x-2 transform inline-block"
                     >
                       {link.name}
-                    </button>
+                    </Link>
                   </li>
                 ))}
               </ul>

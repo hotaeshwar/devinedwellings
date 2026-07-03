@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -6,6 +7,8 @@ import Contact from './components/Contact';
 import PropertyCarousel from './components/PropertyCarousel';
 import Footer from './components/Footer';
 import Project from './components/Project';
+import ScrollToTop from './components/ScrollToTop';
+import SEO from './components/SEO';
 import DivineLogo from './assets/images/Divine.png';
 
 // ── Splash Screen Component ──────────────────────────────────────────────────
@@ -101,46 +104,108 @@ function SplashScreen({ onFinish }) {
 
 // ── App ──────────────────────────────────────────────────────────────────────
 function App() {
-  const [showSplash, setShowSplash] = useState(true);
+  const [showSplash, setShowSplash] = useState(() => {
+    // Only show splash screen on home page and only once per session
+    const isHomePage = window.location.pathname === '/';
+    const splashShown = sessionStorage.getItem('divine_dwellings_splash_shown');
+    return isHomePage && !splashShown;
+  });
 
-  // Navigate to Project page in the same window
-  const openProject = () => {
-    window.location.href = `${window.location.origin}${window.location.pathname}?page=project`;
+  const handleSplashFinish = () => {
+    setShowSplash(false);
+    sessionStorage.setItem('divine_dwellings_splash_shown', 'true');
   };
-
-  // Check if this page was opened as the Project page
-  const params = new URLSearchParams(window.location.search);
-  const isProjectPage = params.get('page') === 'project';
-
-  // If on project page, render only the Project component
-  if (isProjectPage) {
-    return <Project />;
-  }
 
   return (
     <div className="App">
-      {showSplash && <SplashScreen onFinish={() => setShowSplash(false)} />}
+      <ScrollToTop />
+      {showSplash && <SplashScreen onFinish={handleSplashFinish} />}
 
       <div style={{ opacity: showSplash ? 0 : 1, transition: 'opacity 0.6s ease' }}>
-        {/* Pass openProject handler to Navbar */}
-        <Navbar onOpenProject={openProject} />
+        <Navbar />
 
-        <section id="home" className="relative">
-          <Hero />
-        </section>
-
-        <section id="about" className="relative">
-          <About />
-        </section>
-
-        {/* PropertyCarousel after About */}
-        <section id="gallery" className="relative">
-          <PropertyCarousel />
-        </section>
-
-        <section id="contact" className="relative">
-          <Contact />
-        </section>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <SEO
+                  title="Luxury Living Redefined"
+                  description="Divine Dwellings offers premium luxury living residences, villas, and apartments in prime locations like Barog, Himachal Pradesh. Redefine luxury living with SRS Group."
+                  keywords="Divine Dwellings, luxury living, luxury villas Barog, premium residences Himachal Pradesh, SRS Group"
+                />
+                <section id="home" className="relative">
+                  <Hero />
+                </section>
+                <section id="about" className="relative">
+                  <About />
+                </section>
+                <section id="gallery" className="relative">
+                  <PropertyCarousel />
+                </section>
+                <section id="contact" className="relative">
+                  <Contact />
+                </section>
+              </>
+            }
+          />
+          <Route
+            path="/about"
+            element={
+              <div className="pt-20 sm:pt-24">
+                <SEO
+                  title="About Us | Luxury Real Estate Developer"
+                  description="Redefine your lifestyle with Divine Dwellings. Learn about our 15+ years of experience, 500+ happy families, and high quality building standards."
+                  keywords="Divine Dwellings about, luxury developers, real estate experience, happy families real estate"
+                />
+                <section id="about" className="relative">
+                  <About />
+                </section>
+              </div>
+            }
+          />
+          <Route
+            path="/projects"
+            element={
+              <div className="pt-20 sm:pt-24">
+                <SEO
+                  title="Our Projects | Premium Developments"
+                  description="Discover handpicked luxury properties across prime locations by Divine Dwellings, crafted for premium living."
+                  keywords="Divine Dwellings projects, luxury housing projects, premium residential properties"
+                />
+                <Project />
+              </div>
+            }
+          />
+          <Route
+            path="/projects/:projectId"
+            element={
+              <div className="pt-20 sm:pt-24">
+                <SEO
+                  title="Aashiana Hills | Premium 3 BHK Hill Residences"
+                  description="Detailed specifications and layouts for Aashiana Hills in Barog, Himachal Pradesh. 3 BHK stilt + 4 configurations starting at ₹1.6 Cr."
+                  keywords="Aashiana Hills Barog, luxury villas Barog, 3 BHK villas Himachal Pradesh"
+                />
+                <Project />
+              </div>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <div className="pt-20 sm:pt-24">
+                <SEO
+                  title="Contact Us | Book Your Dream Home"
+                  description="Inquire about layouts, pricing, and site visits for Divine Dwellings properties. Submit your budget and preferred location today."
+                  keywords="contact Divine Dwellings, book luxury home, property inquiry, site visit"
+                />
+                <section id="contact" className="relative">
+                  <Contact />
+                </section>
+              </div>
+            }
+          />
+        </Routes>
 
         <Footer />
       </div>
